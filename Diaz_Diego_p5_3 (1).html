@@ -1,0 +1,39 @@
+<!doctype html> <!-- Indica que es un documento HTML -->
+<html>
+  <head>
+    <meta charset="utf-8" /> 
+    <title>Tu nombre</title> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  </head>
+
+  <body>
+    <h1>carita sonrriente</h1>
+
+
+    <script>
+      //Al escribir dentro de esta etiqueta en javascript se ejecutará al final
+    function setup() {
+    createCanvas(500, 500); // Crea un lienzo de 640x360 píxeles
+    // Genera un color aleatorio para el trazo usando random en cada componente RGB
+    background(255);// fondo blanco
+    noFill()
+    strokeWeight(3)
+    circle(250,250,400)// limite del circulo de la cara
+    noFill()
+    stroke(0)
+    strokeWeight(6)
+    arc(250, 310, 230, 160, 0, PI)// la boca
+    fill(0,0,0)
+    circle(165,165,80)
+    circle(320,165,80)// ambos ojos
+    noFill()
+    strokeWeight(5)
+    arc(165,125,90,40,PI,0)
+    arc(320,125,90,40,PI,0)// ambas cejas
+    }
+
+    </script>
+  </body>
+</html>
+
+
