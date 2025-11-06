@@ -1,0 +1,31 @@
+<!doctype html> <!-- Indica que es un documento HTML -->
+<html>
+  <head>
+    <meta charset="utf-8" /> 
+    <title>Tu nombre</title> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  </head>
+
+  <body>
+    <h1>Escribe aquí lo que quieras</h1>
+<script>
+function setup() {
+  createCanvas(340, 360);   // ESTE PROBLEMA ES INTENCIONADO
+  background(2);
+  noStroke();
+
+  // Título centrado "a mano" (hemos elegido 320 porque 640/2 = 320)
+  textSize(75);
+  textAlign(CENTER, TOP);
+  fill(0,0,200);
+  text("Chess Boxing",300, 40);
+  textSize(45);
+  textAlign(RIGHT, TOP);
+  fill(180,0,120);
+  text("Buzkashi",300, 100);
+  textSize(36);
+  textAlign(LEFT, TOP);
+  fill(0,200,190);
+  text("Buzkashi",300, 100);
+}
+</script>
