@@ -22,6 +22,14 @@
         rect(0, 400, width, 100);
 
         // Sol
+          // Posición inicial: empieza entrando desde la izquierda
+    x = -r;
+    y = height * 0.35;   // altura relativa (35% del alto)
+
+    // Velocidad relativa al ancho (escala con el tamaño del lienzo)
+    v = width / 400;     // prueba a ajustar este valor si va muy rápido/lento
+     }
+
         fill(255, 255, 0);
         noStroke();
         ellipse(700, 100, 100, 100);
@@ -56,9 +64,7 @@
         rect(230, 280, 50, 40);
 
         // Coche
-        x = -100;
-        y = height * 0.35;   // altura relativa (35% del alto) 
-        v = width / 400;     // prueba a ajustar este valor si va muy rápido/lento
+      
         fill(255, 0, 0);
         rect(450, 350, 150, 40); // cuerpo
         rect(480, 320, 90, 40);  // parte superior
@@ -72,5 +78,6 @@
   </body>
 
 </html>
+
 
 
