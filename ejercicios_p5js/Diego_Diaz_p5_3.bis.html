@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Casa, coche, sol y nubes</title>
+    <!-- Cargar la librería p5.js -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+  </head>
+  <body>
+    <script>
+      function setup() {
+        createCanvas(800, 500);
+        background(135, 206, 235); // Cielo azul
+      }
+
+      function draw() {
+        noLoop(); // Dibujo estático, sin animación
+
+        // Suelo
+        noStroke();
+        fill(34, 139, 34);
+        rect(0, 400, width, 100);
+
+        // Sol
+        fill(255, 255, 0);
+        noStroke();
+        ellipse(700, 100, 100, 100);
+
+        // Nubes
+        fill(255);
+        ellipse(150, 100, 80, 60);
+        ellipse(190, 100, 80, 60);
+        ellipse(170, 80, 80, 60);
+
+        ellipse(350, 130, 90, 70);
+        ellipse(390, 130, 90, 70);
+        ellipse(370, 110, 90, 70);
+
+        // Casa
+        stroke(0);
+        strokeWeight(2);
+        fill(255, 204, 102);
+        rect(100, 250, 200, 150); // cuerpo de la casa
+
+        // Techo
+        fill(150, 50, 30);
+        triangle(90, 250, 310, 250, 200, 170);
+
+        // Puerta
+        fill(100, 50, 0);
+        rect(180, 330, 50, 70);
+
+        // Ventanas
+        fill(173, 216, 230);
+        rect(120, 280, 50, 40);
+        rect(230, 280, 50, 40);
+
+        // Coche
+        fill(255, 0, 0);
+        rect(450, 350, 150, 40); // cuerpo
+        rect(480, 320, 90, 40);  // parte superior
+
+        // Ruedas
+        fill(0);
+        ellipse(470, 395, 30, 30);
+        ellipse(580, 395, 30, 30);
+      }
+    </script>
+  </body>
+</html>
