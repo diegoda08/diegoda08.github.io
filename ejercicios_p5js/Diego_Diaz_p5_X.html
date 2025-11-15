@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>A1 — Variables (estado + movimiento simple)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- p5.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  </head>
+  <body>
+  <script>
+  // =====================================================
+  // A1 — Variables (estado + movimiento simple, sin wrap)
+  // Autor/a: {Apellidos, Nombre}
+  // Qué hace: un "sol" se desplaza horizontalmente gracias a variables.
+  // Conceptos: variables, estado, setup/draw, width/height, sin condicionales.
+  // =====================================================
+
+  // --- 1) Estado del sistema (variables globales) ---
+  // x, y: posición del sol
+  // v: velocidad (pixeles por fotograma)
+  // d: diámetro del sol (relativo al lienzo, sin "números mágicos")
+  // r: radio del sol (variable derivada)
+  let x, y, v, d, r;
+
+  function setup() {
+    // --- 2) Lienzo e INICIALIZACIÓN del estado ---
+    createCanvas(800, 500);
+
+    // Tamaño del "sol" relativo al lienzo
+    d = min(width, height) * 0.15; // 15% del lado menor
+    r = d / 2;
+
+    // Posición inicial: empieza entrando desde la izquierda
+    x = 100;
+    y = height*3/4;   // altura relativa (35% del alto)
+
+    // Velocidad relativa al ancho (escala con el tamaño del lienzo)
+    v = width / 1200;     // prueba a ajustar este valor si va muy rápido/lento
+  }
+
+  function draw() {
+    // --- 3) DIBUJO por fotogramas (primero, el fondo/escena) ---
+    background(30, 30, 120);       // cielo
+    noStroke();
+    fill(180, 0,180);             // suelo
+    rect(0, height * 0.8, width, height * 0.4);
+
+    fill(0, 0, 0);
+   circle(x,y,d)
+        
+    // --- 5) ACTUALIZACIÓN del estado (la animación) ---
+    // Cada frame, avanzamos x en v pixeles:
+    x = x + v;
+
+    // Nota: no hay condicionales ni "wrap". Si sale de la pantalla, está bien.
+
+    // --- 6) Rotulitos informativos (útiles para depurar y aprender) ---
+    fill(255);
+    textSize(16);
+    textAlign(LEFT, TOP);
+    text("A1 — Variables (estado + movimiento simple)", 10, 10);
+
+    textSize(12);
+    text("x = " + nf(x, 1, 1) + "  |  v = " + nf(v, 1, 2), 10, 32);
+  }
+  </script>
+  </body>
+</html>
