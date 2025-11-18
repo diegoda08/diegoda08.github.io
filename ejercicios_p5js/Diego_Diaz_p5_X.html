@@ -1,69 +1,73 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="es">
   <head>
-    <meta charset="utf-8" />
-    <title>A1 — Variables (estado + movimiento simple)</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- p5.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <meta charset="UTF-8" />
+    <title>Casa, coche, sol y nubes</title>
+    <!-- Cargar la librería p5.js -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
   </head>
   <body>
-  <script>
-  // =====================================================
-  // A1 — Variables (estado + movimiento simple, sin wrap)
-  // Autor/a: {Apellidos, Nombre}
-  // Qué hace: un "sol" se desplaza horizontalmente gracias a variables.
-  // Conceptos: variables, estado, setup/draw, width/height, sin condicionales.
-  // =====================================================
+    <script>
+      function setup() {
+        createCanvas(800, 500);
+        background(135, 206, 235); // Cielo azul
+      }
 
-  // --- 1) Estado del sistema (variables globales) ---
-  // x, y: posición del sol
-  // v: velocidad (pixeles por fotograma)
-  // d: diámetro del sol (relativo al lienzo, sin "números mágicos")
-  // r: radio del sol (variable derivada)
-  let x, y, v, d, r;
+      function draw() {
+        noLoop(); // Dibujo estático, sin animación
 
-  function setup() {
-    // --- 2) Lienzo e INICIALIZACIÓN del estado ---
-    createCanvas(800, 500);
+        // Suelo
+        noStroke();
+        fill(34, 139, 34);
+        rect(0, 400, width, 100);
 
-    // Tamaño del "sol" relativo al lienzo
-    d = min(width, height) * 0.15; // 15% del lado menor
-    r = d / 2;
+        // Sol
+        x=r*0,8
+        y=heigth*0,3
+        d=main(width, height)*0,2
+        r=d/2
+        v=widht/800
+        x=v+x
+        circlue(x,y,r)
+        // Nubes
+        fill(255);
+        ellipse(150, 100, 80, 60);
+        ellipse(190, 100, 80, 60);
+        ellipse(170, 80, 80, 60);
 
-    // Posición inicial: empieza entrando desde la izquierda
-    x = 100;
-    y = height*3/4;   // altura relativa (35% del alto)
+        ellipse(350, 130, 90, 70);
+        ellipse(390, 130, 90, 70);
+        ellipse(370, 110, 90, 70);
 
-    // Velocidad relativa al ancho (escala con el tamaño del lienzo)
-    v = width / 1200;     // prueba a ajustar este valor si va muy rápido/lento
-  }
+        // Casa
+        stroke(0);
+        strokeWeight(2);
+        fill(255, 204, 102);
+        rect(100, 250, 200, 150); // cuerpo de la casa
 
-  function draw() {
-    // --- 3) DIBUJO por fotogramas (primero, el fondo/escena) ---
-    background(30, 30, 120);       // cielo
-    noStroke();
-    fill(180, 0,180);             // suelo
-    rect(0, height * 0.8, width, height * 0.4);
+        // Techo
+        fill(150, 50, 30);
+        triangle(90, 250, 310, 250, 200, 170);
 
-    fill(0, 0, 0);
-   circle(x,y,d)
-        
-    // --- 5) ACTUALIZACIÓN del estado (la animación) ---
-    // Cada frame, avanzamos x en v pixeles:
-    x = x + v;
+        // Puerta
+        fill(100, 50, 0);
+        rect(180, 330, 50, 70);
 
-    // Nota: no hay condicionales ni "wrap". Si sale de la pantalla, está bien.
+        // Ventanas
+        fill(173, 216, 230);
+        rect(120, 280, 50, 40);
+        rect(230, 280, 50, 40);
 
-    // --- 6) Rotulitos informativos (útiles para depurar y aprender) ---
-    fill(255);
-    textSize(16);
-    textAlign(LEFT, TOP);
-    text("A1 — Variables (estado + movimiento simple)", 10, 10);
+        // Coche
+        fill(255, 0, 0);
+        rect(450, 350, 150, 40); // cuerpo
+        rect(480, 320, 90, 40);  // parte superior
 
-    textSize(12);
-    text("x = " + nf(x, 1, 1) + "  |  v = " + nf(v, 1, 2), 10, 32);
-  }
-  </script>
+        // Ruedas
+        fill(0);
+        ellipse(470, 395, 30, 30);
+        ellipse(580, 395, 30, 30);
+      }
+    </script>
   </body>
 </html>
