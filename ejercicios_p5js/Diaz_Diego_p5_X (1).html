@@ -2,33 +2,36 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>sol</title>
+    <title>A1 — Variables (estado + movimiento simple)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- p5.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
   </head>
   <body>
     <script>
-       let x, y, v, d, r;
+      let x, y, v, d, r;
+
       function setup() {
         createCanvas(800, 500);
         background(30, 30, 120);   
+
         // Sol
-        
-        d= min(width, height)*0.2;
-        r= d/2;
-        y= y= height*0.3;
-        x = -r;
-        v= width/800;
-        }
-        function draw() {
+        d = min(width, height) * 0.2;  // Tamaño del sol
+        r = d / 2;                      // Radio del sol
+        y = height * 0.3;               // Posición vertical del sol
+        x = -r;                         // Inicia fuera de la pantalla
+        v = width / 800;                // Velocidad del sol
+      }
+
+      function draw() {
         noStroke();
-        fill(20, 120, 40);             // suelo
-        rect(0, height * 0.8, width, height * 0.2);
-        fill(255, 210, 0);
-        circle(x , y, d);
-        x = x + v;
-       
+        fill(20, 120, 40);  // Suelo
+        rect(0, height * 0.8, width, height * 0.2);  // Dibuja el suelo
+
+        fill(255, 210, 0);  // Color del sol
+        circle(x, y, d);    // Dibuja el sol
+
+        x = x + v;  // Mueve el sol hacia la derecha
       }
     </script>
   </body>
