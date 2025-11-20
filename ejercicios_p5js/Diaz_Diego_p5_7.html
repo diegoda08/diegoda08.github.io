@@ -13,14 +13,21 @@
       // ============================
       let cocheX;   // posición en X del coche
       let v;        // velocidad del coche
-
+      let  xG, yG, vyG, dG, rG
       function setup() {
         createCanvas(800, 500);
 
         // Inicialización sin números mágicos
         cocheX = width * 0.55;  // el coche inicia un poco a la derecha
         v = width * 0.002;      // velocidad suave proporcional al tamaño del canvas
-      }
+        dG= width * 0.15;
+        rG= d/2;
+        xG= r;
+        yG= height * 0.35;
+        vxG= width / 1000;
+        vxG= height/1200;
+        xG= xG+vxG;
+        yG= yG*vyG=}
 
       function draw() {
         background(135, 206, 235); // Cielo azul
@@ -32,6 +39,12 @@
         fill(34, 139, 34);
         rect(0, height * 0.8, width, height * 0.2);
 
+        //=============================
+        //Globo
+        //=============================
+        fill(255, 80, 80)
+        circle(xG, yG, dG)
+        
         // ============================
         // Sol
         // ============================
@@ -100,5 +113,6 @@
     </script>
   </body>
 </html>
+
 
 
