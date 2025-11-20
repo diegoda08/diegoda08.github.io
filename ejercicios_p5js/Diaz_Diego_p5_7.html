@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Escena con coche en movimiento</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+  </head>
+
+  <body>
+    <script>
+      // ============================
+      // Variables globales
+      // ============================
+      let cocheX;   // posición en X del coche
+      let v;        // velocidad del coche
+
+      function setup() {
+        createCanvas(800, 500);
+
+        // Inicialización sin números mágicos
+        cocheX = width * 0.55;  // el coche inicia un poco a la derecha
+        v = width * 0.002;      // velocidad suave proporcional al tamaño del canvas
+      }
+
+      function draw() {
+        background(135, 206, 235); // Cielo azul
+
+        // ============================
+        // Suelo
+        // ============================
+        noStroke();
+        fill(34, 139, 34);
+        rect(0, height * 0.8, width, height * 0.2);
+
+        // ============================
+        // Sol
+        // ============================
+        fill(255, 255, 0);
+        ellipse(width * 0.87, height * 0.2, 100, 100);
+
+        // ============================
+        // Nubes
+        // ============================
+        fill(255);
+        ellipse(width * 0.19, height * 0.2, 80, 60);
+        ellipse(width * 0.24, height * 0.2, 80, 60);
+        ellipse(width * 0.215, height * 0.16, 80, 60);
+
+        ellipse(width * 0.44, height * 0.26, 90, 70);
+        ellipse(width * 0.49, height * 0.26, 90, 70);
+        ellipse(width * 0.465, height * 0.22, 90, 70);
+
+        // ============================
+        // Casa
+        // ============================
+        stroke(0);
+        strokeWeight(2);
+        fill(255, 204, 102);
+        rect(width * 0.12, height * 0.5, width * 0.25, height * 0.3);
+
+        // Techo
+        fill(150, 50, 30);
+        triangle(
+          width * 0.11, height * 0.5,
+          width * 0.37, height * 0.5,
+          width * 0.245, height * 0.34
+        );
+
+        // Puerta
+        fill(100, 50, 0);
+        rect(width * 0.225, height * 0.66, width * 0.062, height * 0.14);
+
+        // Ventanas
+        fill(173, 216, 230);
+        rect(width * 0.15, height * 0.56, width * 0.062, height * 0.08);
+        rect(width * 0.31, height * 0.56, width * 0.062, height * 0.08);
+
+        // ============================
+        // Coche (en movimiento)
+        // ============================
+        fill(255, 0, 0);
+        rect(cocheX, height * 0.7, width * 0.19, height * 0.08); // cuerpo
+        rect(cocheX + width * 0.037, height * 0.64, width * 0.11, height * 0.08); // parte superior
+
+        // Ruedas
+        fill(0);
+        ellipse(cocheX + width * 0.025, height * 0.79, 30, 30);
+        ellipse(cocheX + width * 0.145, height * 0.79, 30, 30);
+
+        // ============================
+        // Actualización del movimiento
+        // ============================
+        cocheX += v;
+
+        // Reinicio cuando sale de la pantalla
+        if (cocheX > width + 50) {
+          cocheX = -150;
+        }
+      }
+    </script>
+  </body>
+</html>
+
+
