@@ -13,21 +13,20 @@
       // ============================
       let cocheX;   // posición en X del coche
       let v;        // velocidad del coche
-      let  xG, yG, vyG, dG, rG
+      let x_s, y_s, v_s, d_s, r_s;
+      let x_l, y_l, v_l, d_l, r_l;
       function setup() {
         createCanvas(800, 500);
 
         // Inicialización sin números mágicos
         cocheX = width * 0.55;  // el coche inicia un poco a la derecha
         v = width * 0.002;      // velocidad suave proporcional al tamaño del canvas
-        dG= width * 0.15;
-        rG= d/2;
-        xG= r;
-        yG= height * 0.35;
-        vxG= width / 1000;
-        vxG= height/1200;
-        xG= xG+vxG;
-        yG= yG*vyG=}
+        d_s = width * 0.15;  r_s = d_s * 0.5;
+        d_l = height * 0.30; r_l = d_l * 0.5;
+        x_s = -r_s;            y_s = height * 0.35;
+        x_l = -width - r_l;    y_l = height * 0.55; // más baja y mucho más lejos
+        v_s = width / 800;
+        v_l = v_s;}
 
       function draw() {
         background(135, 206, 235); // Cielo azul
@@ -40,17 +39,19 @@
         rect(0, height * 0.8, width, height * 0.2);
 
         //=============================
-        //Globo
+        //Luna
         //=============================
-        fill(255, 80, 80)
-        circle(xG, yG, dG)
+         fill(255);
+         circle(x_l, y_l, d_l);
+         x_l = x_l + v_l;
+
         
         // ============================
         // Sol
         // ============================
-        fill(255, 255, 0);
-        ellipse(width * 0.87, height * 0.2, 100, 100);
-
+        fill(255, 210, 0);
+        circle(x_s, y_s, d_s);
+        x_s = x_s + v_s;
         // ============================
         // Nubes
         // ============================
@@ -113,6 +114,7 @@
     </script>
   </body>
 </html>
+
 
 
 
