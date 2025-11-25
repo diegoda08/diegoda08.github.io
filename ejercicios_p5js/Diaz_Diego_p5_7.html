@@ -15,7 +15,7 @@
       let v;        // velocidad del coche
       let x_s, y_s, v_s, d_s, r_s;
       let x_l, y_l, v_l, d_l, r_l;
-      let xG, yG, vyG, vyG, d_G, r_G;
+      let xG, yG, vyG, d_G, r_G;
       function setup() {
         createCanvas(800, 500);
 
@@ -28,18 +28,21 @@
         x_l = -width - r_l;    y_l = height * 0.55; // más baja y mucho más lejos
         v_s = width / 800;
         v_l = v_s;
-        xG = -width;
-        yG = width * 0.1; 
-        vyG = height/600;
         d_G = width * 0.1;
-        r_G = d/2;}
+        xG = width/2 ;
+        yG = height * 0.1; 
+        vyG = -1*height/600;
+        r_G = d/2;
+         cuerda = 1.2*d_G}
 
       function draw() {
         background(135, 206, 235); // Cielo azul
 
         fill(255, 80, 80);
-        circle(xG, yG, r_G);
+        circle(xG, yG, d_G);
         yG = yG + vyG;
+        stroke(60); 
+        line(xG, yG + 0.5*d_G, xG, yG + 0.5*d_G + cuerda)
         // ============================
         // Suelo
         // ============================
@@ -123,6 +126,7 @@
     </script>
   </body>
 </html>
+
 
 
 
