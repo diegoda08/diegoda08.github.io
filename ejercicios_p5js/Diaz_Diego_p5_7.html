@@ -17,7 +17,7 @@
       let x_s, y_s, v_s, d_s, r_s;
       let x_l, y_l, v_l, d_l, r_l;
       let xG, yG, vyG, d_G, r_G, cuerda
-      let C, xT, yT, dC, yG, xG, rG;
+      let C, xT, yT, dC, yC, xC, rC;
       function setup() {
         createCanvas(800, 500);
 
@@ -40,9 +40,9 @@
         xT = Widht/3;
         yT = height * 0.8;
         dC = height*0.2;
-        yG = heigth/3;
-        xG = Widht/3;
-        rG = d/2;}
+        yC = heigth/3;
+        xC = Widht/3;
+        rC = d/2;}
 
       function draw() {
         background(135, 206, 235); // Cielo azul
@@ -63,11 +63,14 @@
         rect(0, height * 0.8, width, height * 0.2);
 
         //=============================
-        //Tronco
+        //Tronco y copa
         //=============================
         fill(100)
-        rect(x, y, x+70, y + 100)
+        rect(xT, yT, x+70, y + 100)
         yG = yG + C
+        fill(202)
+        circle(xC, yC, dC)
+        dC = dC + C
         //=============================
         //Luna
         //=============================
@@ -144,6 +147,7 @@
     </script>
   </body>
 </html>
+
 
 
 
