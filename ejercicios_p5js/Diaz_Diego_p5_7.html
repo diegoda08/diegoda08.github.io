@@ -2,7 +2,7 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title> variables :)</title>
+    <title>variables :)</title>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
   </head>
 
@@ -12,49 +12,67 @@
       // ============================
       // Variables globales
       // ============================
-      let cocheX;   // posición en X del coche
-      let v;        // velocidad del coche
+      let cocheX;   
+      let v;        
       let x_s, y_s, v_s, d_s, r_s;
       let x_l, y_l, v_l, d_l, r_l;
-      let xG, yG, vyG, d_G, r_G, cuerda
+      let xG, yG, vyG, d_G, r_G, cuerda;
       let C, xT, yT, dC, yC, xC, rC;
+
       function setup() {
         createCanvas(800, 500);
 
-        // Inicialización sin números mágicos
-        cocheX = width * 0.55;  // el coche inicia un poco a la derecha
-        v = width * 0.002;      // velocidad suave proporcional al tamaño del canvas
-        d_s = width * 0.15;  r_s = d_s * 0.5;
-        d_l = height * 0.30; r_l = d_l * 0.5;
-        x_s = -r_s;            y_s = height * 0.35;
-        x_l = -width - r_l;    y_l = height * 0.55; // más baja y mucho más lejos
+        cocheX = width * 0.55;
+        v = width * 0.002;
+
+        d_s = width * 0.15;  
+        r_s = d_s * 0.5;
+
+        d_l = height * 0.30; 
+        r_l = d_l * 0.5;
+
+        x_s = -r_s;            
+        y_s = height * 0.35;
+
+        x_l = -width - r_l;    
+        y_l = height * 0.55;
+
         v_s = width / 800;
         v_l = v_s;
+
         d_G = width * 0.1;
-        xG = width/2 ;
+        xG = width / 2;   // corregido
         yG = height * 0.1; 
-        vyG = -1*height/600;
-        r_G = d_G/2;
+        vyG = -1 * height / 600;
+
+        r_G = d_G / 2;
         cuerda = 1.2 * d_G;
-        C = height/600;
-        xT = Widht/3;
+
+        C = height / 600;
+
+        xT = width / 3;
         yT = height * 0.8;
-        dC = height*0.2;
-        yC = heigth/3;
-        xC = Widht/3;
-        rC = d/2;}
+
+        dC = height * 0.2;
+        yC = height / 3;
+        xC = width / 3;
+
+        rC = dC / 2;   // corregido
+      }
 
       function draw() {
-        background(135, 206, 235); // Cielo azul
+        background(135, 206, 235);
 
         //=============================
-        //Globo
+        // Globo
         //=============================
         fill(255, 80, 80);
         circle(xG, yG, d_G);
-        yG = yG + vyG;
+        yG += vyG; // solo una vez
+
         stroke(60); 
-        line(xG, yG , xG, yG + cuerda)
+        line(xG, yG , xG, yG + cuerda);
+
         // ============================
         // Suelo
         // ============================
@@ -63,28 +81,29 @@
         rect(0, height * 0.8, width, height * 0.2);
 
         //=============================
-        //Tronco y copa
+        // Árbol
         //=============================
-        fill(100)
-        rect(xT, yT, x+70, y + 100)
-        yG = yG + C
-        fill(202)
-        circle(xC, yC, dC)
-        dC = dC + C
-        //=============================
-        //Luna
-        //=============================
-         fill(255);
-         circle(x_l, y_l, d_l);
-         x_l = x_l + v_l;
+        fill(100);
+        rect(xT, yT, 70, 100);   // corregido
 
-        
+        fill(50, 180, 50);
+        circle(xC, yC, dC);
+        dC += C;
+
+        //=============================
+        // Luna
+        //=============================
+        fill(255);
+        circle(x_l, y_l, d_l);
+        x_l += v_l;
+
         // ============================
         // Sol
         // ============================
         fill(255, 210, 0);
         circle(x_s, y_s, d_s);
-        x_s = x_s + v_s;
+        x_s += v_s;
+
         // ============================
         // Nubes
         // ============================
@@ -105,7 +124,6 @@
         fill(255, 204, 102);
         rect(width * 0.12, height * 0.5, width * 0.25, height * 0.3);
 
-        // Techo
         fill(150, 50, 30);
         triangle(
           width * 0.11, height * 0.5,
@@ -113,33 +131,26 @@
           width * 0.245, height * 0.34
         );
 
-        // Puerta
         fill(100, 50, 0);
         rect(width * 0.225, height * 0.66, width * 0.062, height * 0.14);
 
-        // Ventanas
         fill(173, 216, 230);
         rect(width * 0.15, height * 0.56, width * 0.062, height * 0.08);
         rect(width * 0.31, height * 0.56, width * 0.062, height * 0.08);
 
         // ============================
-        // Coche (en movimiento)
+        // Coche
         // ============================
         fill(255, 0, 0);
-        rect(cocheX, height * 0.7, width * 0.19, height * 0.08); // cuerpo
-        rect(cocheX + width * 0.037, height * 0.64, width * 0.11, height * 0.08); // parte superior
+        rect(cocheX, height * 0.7, width * 0.19, height * 0.08);
+        rect(cocheX + width * 0.037, height * 0.64, width * 0.11, height * 0.08);
 
-        // Ruedas
         fill(0);
         ellipse(cocheX + width * 0.025, height * 0.79, 30, 30);
         ellipse(cocheX + width * 0.145, height * 0.79, 30, 30);
 
-        // ============================
-        // Actualización del movimiento
-        // ============================
         cocheX += v;
 
-        // Reinicio cuando sale de la pantalla
         if (cocheX > width + 50) {
           cocheX = -150;
         }
