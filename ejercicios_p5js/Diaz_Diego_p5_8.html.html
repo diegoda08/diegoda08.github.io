@@ -24,7 +24,7 @@
       //tierra
       dT = 0,2 * dS
       dOT = 0,1 * min(widht, height9
-      aiT =                 
+      aiT = 0                
     }
     function draw() {
       background(50,50,50);
@@ -37,6 +37,7 @@
       r = dOT / 2
       xT = xS + cos(aiT) * r;
       yT = yS + sin(aiT) * r;
+      fill(0,0,0)
       circler(xT, yT, dT);
       aiT = aiT + aniT
       
@@ -47,6 +48,7 @@
   </script>
   </body>
 </html>
+
 
 
 
