@@ -1,4 +1,4 @@
-!doctype html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -9,8 +9,8 @@
   <body>
   <script>
   
-    let xS, yS, dS, rS, r;
-    let xT, yT , dT, dOT, aiT;
+    let xS, yS, dS, rS;
+    let xT, yT , dT, dOT, aT, inc_aT;
   
     function setup() {
       createCanvas(800,800);
@@ -22,9 +22,9 @@
       rS = dS / 2;
 
       //tierra
-      dT = 0.2 * dS
-      dOT = 0.1 * min(widht, height9
-      aiT = 0                
+      dT = 0.2 * dS;
+      dOT = 0.1 * min(width, height);
+      aT = 0 ;         
     }
     function draw() {
       background(50,50,50);
@@ -34,9 +34,9 @@
       circle(xS, yS, dS);
 
       // Tierra orbitando
-      let r = dOT / 2
-      xT = xS + cos(aiT) * r;
-      yT = yS + sin(aiT) * r;
+      let rOt = dOT / 2
+      xT = xS + cos(aT) * rOt;
+      yT = yS + sin(aT) * r;
       fill(0,0,0)
       cicler(xT, yT, dT);
       aiT += 0.05
@@ -48,11 +48,3 @@
   </script>
   </body>
 </html>
-
-
-
-
-
-
-
-
