@@ -9,13 +9,15 @@
   <body>
   <script>
   
-    let xS, yS, dS, rS;
+   let xS, yS, dS, rS;
     let xT, yT , dT, dOT, aiT, inc_aT;
     let xM, yM , dM, dOM, aiM, inc_aM;
     let xMA, yMA , dMA, dOMA, aiMA, inc_aMA;
     let xV, yV , dV, dOV, aiV, inc_aV;
+	let xJ, yJ, dJ, aiJ, dOJ, inc_aiJ;
+	let xL, yL, dL, dOL, aiL, inc_aL;
     function setup() {
-      createCanvas(800,800);
+      createCanvas(1200,1200);
 
       // Sol
       dS = width * 0.2;
@@ -45,7 +47,20 @@
       dV = 0.17 * dS;
       dOV = 0.48 * width;
       aiV = 1;
-      inc_aV = 0.01 ; }
+      inc_aV = 0.01 ; 
+	 
+	 //Jupiter 
+	 dOJ = 0.85 * width;
+	 dJ = 0.4 * dS;
+	 aiJ = 7;
+	 inc_aiJ = 0.002;
+	 
+	 //Luna
+	  dOL = 0.1 * width;
+	 dL = 0.4 * dT;
+	 aiL = 7;
+	 inc_aiL = 0.02;
+	 }
     function draw() {
       background(50,50,50);
 
@@ -83,7 +98,24 @@
       yV = yS + sin(aiV) * rOV;
       fill(143, 49, 49);
       circle(xV, yV, dV);
-      aiV = aiV + inc_aV; }
+      aiV = aiV + inc_aV; 
+	  
+	  // Jupiter orbitando 
+	  let rOJ = dOJ / 2;
+      xJ = xS + cos(aiJ) * rOJ;
+	  yJ = yS + sin(aiJ) * rOJ;
+	  fill(159, 164, 204);
+	  circle(xJ, yJ, dJ);
+	  aiJ = aiJ + inc_aiJ;
+	  
+	  // Luna orbitando
+	  let rOL = dOL / 2;
+      xL = xT + cos(aiL) * rOL;
+	  yL = yT + sin(aiL) * rOL;
+	  fill(142, 144, 153);
+	  circle(xL, yL, dL);
+	  aiL = aiL + inc_aiL;
+	  }
 
   </script>
   </body>
