@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>T7 · v1 — Sol cruzando</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  </head>
+  <body>
+  <script>
+// Estado global
+let xS, yS, dS, rS, vS;
+
+function setup() {
+  createCanvas(800, 600);  // Puedes ajustar el tamaño del lienzo
+  // Inicializamos las variables
+  dS = 100; // Diámetro del Sol
+  rS = dS / 2; // Radio del Sol
+  vS = 2; // Velocidad del Sol (puedes ajustarla)
+  xS = -rS; // Posición inicial del Sol (fuera de la pantalla por la izquierda)
+  yS = height / 2; // Altura fija del Sol (en el centro de la pantalla)
+}
+
+function draw() {
+  // Determinar si es día o noche según la posición horizontal del Sol
+  if (xS - rS <= width) {
+    // Es día (cielo azul)
+    background(135, 206, 250); // Color de cielo azul
+  } else {
+    // Es noche (cielo negro)
+    background(0); // Color de cielo negro
+  }
+
+  // Dibujar el suelo
+  fill(0, 200, 0); // Color de césped o suelo
+  rect(0, height - 50, width, 50); // Suelo
+
+  // Dibujar el Sol
+  fill(255, 223, 0); // Color del Sol (amarillo)
+  ellipse(xS, yS, dS, dS); // Dibujar el Sol (círculo)
+
+  // Actualizar la posición del Sol
+  xS = xS + vS;
+
+  // Reiniciar el Sol cuando salga completamente por la derecha
+  if (xS >= 2 * width - rS) {
+    xS = -rS; // El Sol vuelve a entrar desde el lado izquierdo
+  }
+}
+  </script>
+  </body>
+</html>
