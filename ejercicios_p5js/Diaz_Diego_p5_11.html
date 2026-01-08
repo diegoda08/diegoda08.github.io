@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>T7 SIST DOLSR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  </head>
+  <body>
+  <script>
+// Variables del Sol
+let xS, yS, dS, rS, vS;  // Sol
+
+// Variables de la Luna
+let xL, yL, dL, rL, vL;  // Luna
+
+function setup() {
+  createCanvas(600, 800);  // Lienzo con dimensiones relativas
+
+  // Inicialización del Sol
+  dS = min(width, height) * 0.20;  // El tamaño del Sol es 20% del menor de width o height
+  rS = dS / 2;  // Radio del Sol
+  xS = -rS;  // El Sol empieza fuera de la pantalla por la izquierda
+  yS = height / 4;  // Altura del Sol (un cuarto de la altura total)
+  vS = width / 400;  // Velocidad del Sol, relativa al ancho
+
+  // Inicialización de la Luna
+  dL = dS * 0.5;  // El diámetro de la Luna es la mitad del Sol
+  rL = dL / 2;  // Radio de la Luna
+  xL = -width - rL;  // La Luna empieza fuera de la pantalla a la izquierda
+  yL = height / 3;  // Altura de la Luna (tercio de la altura total)
+  vL = vS;  // La Luna tiene la misma velocidad que el Sol
+}
+
+function draw() {
+  // Fondo (cielo) dependiendo de la posición del Sol
+  if (xS <= width + rS) {
+    // Es de día (cielo azul)
+    background(0, 0, 255);  // Fondo azul
+  } else {
+    // Es de noche (cielo negro)
+    background(10);  // Fondo negro oscuro
+  }
+
+  // Dibujar el suelo (opcional)
+  noStroke();
+  fill(20, 120, 40);  // Color verde para el suelo
+  rect(0, height * 0.8, width, height * 0.2);  // Suelo (20% de la altura)
+
+  // Dibujar el Sol
+  noStroke();
+  fill(245, 234, 10);  // Color amarillo para el Sol
+  circle(xS, yS, dS);  // Dibujar el Sol
+
+  // Dibujar la Luna
+  noStroke();
+  fill(200);  // Color blanco/gris claro para la Luna
+  circle(xL, yL, dL);  // Dibujar la Luna
+
+  // Mover el Sol y la Luna con la misma velocidad
+  xS += vS;
+  xL += vL;
+
+  // Reiniciar el Sol y la Luna cuando superen el umbral
+  if (xS > 2 * width + rS) {
+    // Cuando el Sol sale por completo, reiniciamos la posición
+    xS = -rS;  // El Sol vuelve a entrar desde la izquierda
+    xL = -width - rL;  // La Luna vuelve a entrar desde la izquierda, fuera de pantalla
+  }
+
+  // Opcional: Mostrar las posiciones de Sol y Luna en pantalla para depuración
+  textSize(14);
+  fill(255);
+  text(`xS: ${xS}`, 10, 20);  // Mostrar la posición del Sol
+  text(`xL: ${xL}`, 10, 40);  // Mostrar la posición de la Luna
+}
+
+ </script>
+  </body>
+</html>
