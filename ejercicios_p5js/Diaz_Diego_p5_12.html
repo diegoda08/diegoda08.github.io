@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>T7 SIST DOLSR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  </head>
+  <body>
+  <script>
+
+let xS, yS, rS;
+let xL, yL, rL;
+let vel;
+
+// Variables del calendario
+let dia, mes, anio;
+
+function setup() {
+  createCanvas(600, 400);
+
+  // Sol
+  rS = width * 0.1;
+  xS = -rS;
+  yS = height / 2;
+
+  // Luna
+  rL = width * 0.05;
+  xL = - width;
+  yL = height / 2;
+
+  vel = 2;
+
+  // Inicialización del calendario
+  dia = 1;
+  mes = 1;
+  anio = 2025;
+}
+
+function draw() {
+  
+
+  // Movimiento
+  xS = xS + vel;
+  xL = xL + vel;
+
+ // 🌙 Día / Noche (texto legible)
+  noStroke();
+  if (xS <= width + rS) {
+   
+	background (12, 170, 232);
+  } else {    
+    background (0)}
+	
+  // Sol
+  fill(232, 228, 12);
+  circle(xS, yS, rS);
+
+  // Luna
+  fill(200);
+  circle(xL, yL , rL);
+
+  
+  textSize(20);
+  text("Fecha: (" + dia + ") (" + mes + ") (" + anio + ")", 10, 30);
+
+  // 🔁 Reinicio del Sol = nuevo día
+  if (xS > 2 * width + rS) {
+    xS = -rS;
+    xL = - width ;}
+
+    // Incremento del día
+  if   (xS > 2 * width + rS){
+	dia = dia + 1
+	}
+  
+    // Cambio de mes
+     (dia > 30) {
+      dia = 1;
+      mes = mes + 1;
+    }
+
+    // Cambio de año
+    if (mes > 12) {
+      mes = 1;
+      anio = anio + 1;
+    }
+  }
+
+ </script>
+  </body>
+</html>
