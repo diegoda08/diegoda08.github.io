@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Stickman con teclado — T13</title>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.3/lib/p5.min.js"></script>
+</head>
+
+<body>
+<script>
+
+// ===================
+// VARIABLES T12
+// ===================
+let sunAngle = 0;
+let day = 1;
+let month = 1;
+let year = 2024;
+
+// ===================
+// VARIABLES STICKMAN
+// ===================
+let xP, yP;
+let S;
+let vP;
+
+let groundY;
+let vY;
+let jumpV;
+let g;
+
+// ===================
+// SETUP
+// ===================
+function setup() {
+  createCanvas(800, 500);
+
+  // ----- Suelo -----
+  groundY = 0.80 * height;
+
+  // ----- Stickman -----
+  S  = 0.12 * min(width, height);
+  xP = 0.25 * width;
+  yP = groundY;
+
+  vP = width / 150;
+
+  vY = 0;
+  jumpV = -0.030 * height;
+  g = 0.0016 * height;
+}
+
+// ===================
+// DRAW
+// ===================
+function draw() {
+
+  // ----- Cielo día / noche -----
+  let sky = map(sin(sunAngle), -1, 1, 20, 180);
+  background(70, 120 + sky, 200 + sky);
+
+  // ----- Sol y Luna -----
+  let cx = width / 2;
+  let cy = height * 0.9;
+  let r = width * 0.45;
+
+  let sx = cx + cos(sunAngle) * r;
+  let sy = cy - sin(sunAngle) * r;
+
+  // Sol
+  fill(255, 200, 0);
+  noStroke();
+  circle(sx, sy, 60);
+
+  // Luna (opuesta)
+  fill(230);
+  circle(cx - cos(sunAngle) * r, cy + sin(sunAngle) * r, 45);
+
+  sunAngle += 0.003;
+
+  // ----- Suelo -----
+  fill(60, 160, 60);
+  rect(0, groundY, width, height - groundY);
+
+  // ----- Calendario -----
+  fill(255);
+  textSize(16);
+  textAlign(LEFT, TOP);
+  text("Fecha: " + day + "/" + month + "/" + year, 20, 20);
+
+  // Avance del calendario
+  if (frameCount % 240 === 0) {
+    day++;
+    if (day > 30) {
+      day = 1;
+      month++;
+    }
+    if (month > 12) {
+      month = 1;
+      year++;
+    }
+  }
+
+  // ===================
+  // MOVIMIENTO STICKMAN
+  // ===================
+  if (keyIsDown(LEFT_ARROW)) {
+    xP -= vP;
+  } else if (keyIsDown(RIGHT_ARROW)) {
+    xP += vP;
+  }
+
+  if (xP < 0) xP = 0;
+  if (xP > width) xP = width;
+
+  // ----- Física del salto -----
+  vY += g;
+  yP += vY;
+
+  if (yP > groundY) {
+    yP = groundY;
+    vY = 0;
+  }
+
+  // ===================
+  // DIBUJO STICKMAN
+  // ===================
+  let rHead = 0.20 * S;
+  let bodyL = 0.60 * S;
+  let armL  = 0.45 * S;
+  let legL  = 0.55 * S;
+
+  let hipY = yP - legL;
+  let shoulderY = hipY - bodyL;
+  let headY = shoulderY - rHead;
+
+  stroke(0);
+  strokeWeight(0.06 * S);
+  noFill();
+
+  // Cabeza
+  circle(xP, headY, 2 * rHead);
+
+  // Tronco
+  line(xP, shoulderY, xP, hipY);
+
+  // Brazos
+  line(xP - 0.25*S, shoulderY, xP + 0.25*S, shoulderY);
+  line(xP - 0.25*S, shoulderY, xP - 0.25*S, shoulderY + armL);
+  line(xP + 0.25*S, shoulderY, xP + 0.25*S, shoulderY + armL);
+
+  // Piernas
+  line(xP, hipY, xP - 0.18*S, yP);
+  line(xP, hipY, xP + 0.18*S, yP);
+}
+
+// ===================
+// EVENTO TECLADO
+// ===================
+function keyPressed() {
+  if (keyCode === UP_ARROW) {
+    if (yP === groundY) {
+      vY = jumpV;
+    }
+  }
+}
+
+</script>
+</body>
+</html>
