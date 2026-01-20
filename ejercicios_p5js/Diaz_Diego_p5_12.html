@@ -64,16 +64,13 @@ function draw() {
   textSize(20);
   text("Fecha: (" + dia + ") (" + mes + ") (" + anio + ")", 10, 30);
 
-  // Reinicio del Sol = nuevo día
-  if (xS > 2 * width + rS) {
-    xS = -rS;
-    xL = - width ;}
+// Reinicio del Sol = nuevo día
+if (xS > 2 * width + rS) {
+  xS = -rS;
+  xL = -width;
+  dia = dia + 1;   // ← aquí incrementa el día
+}
 
-    // Incremento del día
-  if (xS = 2 * width ){
-	dia = dia + 1;
-	}
-  
     // Cambio de mes
   if (dia > 30) {
       dia = 1;
@@ -91,6 +88,7 @@ function draw() {
   </body>
 
 </html>
+
 
 
 
