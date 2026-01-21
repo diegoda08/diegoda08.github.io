@@ -7,180 +7,88 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
   </head>
   <body>
-    <script>
-      let xS, yS, rS;
-      let xL, yL, rL;
-      let vel;
+  <script>
 
-      // Variables del calendario
-      let dia, mes, anio;
+let xS, yS, rS;
+let xL, yL, rL;
+let vel;
 
-      // Variables del Stickman
-      let xP, yP, S, vP, groundY, vY, jumpV, g;
+// Variables del calendario
+let dia, mes, anio;
 
-      function setup() {
-        createCanvas(600, 400);
+function setup() {
+  createCanvas(600, 400);
 
-        // Sol
-        rS = width * 0.1;
-        xS = -rS;
-        yS = height / 2;
+  // Sol
+  rS = width * 0.1;
+  xS = -rS;
+  yS = height / 2;
 
-        // Luna
-        rL = width * 0.05;
-        xL = -width;
-        yL = height / 2;
+  // Luna
+  rL = width * 0.05;
+  xL = - width;
+  yL = height / 2;
 
-        vel = 2;
+  vel = 2;
 
-        // Inicialización del calendario
-        dia = 1;
-        mes = 1;
-        anio = 2025;
+  // Inicialización del calendario
+  dia = 1;
+  mes = 1;
+  anio = 2025;
+}
 
-        // Suelo
-        groundY = 0.80 * height;
+function draw() {
+  
 
-        // Stickman: tamaño y posición inicial
-        S = 0.12 * min(width, height);
-        xP = 0.25 * width;
-        yP = groundY;
+  // Movimiento
+  xS = xS + vel;
+  xL = xL + vel;
 
-        // Movimiento horizontal
-        vP = width / 150;
+ // 🌙 Día / Noche (texto legible)
+  noStroke();
+  if (xS <= width + rS) {
+   
+	background (12, 170, 232);
+  } else {    
+    background (0)}
+	
+  // Sol
+  fill(232, 228, 12);
+  circle(xS, yS, rS);
 
-        // Salto
-        vY = 0;
-        jumpV = -0.030 * height;
-        g = 0.0016 * height;
-      }
+  // Luna
+  fill(200);
+  circle(xL, yL , rL);
 
-      function draw() {
-        // Dibuja el suelo verde
-        fill(34, 139, 34); // Color verde
-        noStroke();
-        rect(0, groundY, width, height - groundY); // Rectángulo que ocupa todo el ancho y desde groundY hasta el borde inferior
+  
+  textSize(20);
+  text("Fecha: (" + dia + ") (" + mes + ") (" + anio + ")", 10, 30);
 
-        // Movimiento del sol y luna
-        xS = xS + vel;
-        xL = xL + vel;
+// Reinicio del Sol = nuevo día
+if (xS > 2 * width + rS) {
+  xS = -rS;
+  xL = -width;
+  dia = dia + 1;   // ← aquí incrementa el día
+}
 
-        // Día/Noche
-        noStroke();
-        if (xS <= width + rS) {
-          background(12, 170, 232);
-        } else {    
-          background(0);
-        }
-        // Suelo
-        fill(34, 139, 34); // Color verde (puedes ajustar los valores RGB si prefieres otro tono)
-        noStroke();
-        rect(0, groundY, width, height - groundY); // Rectángulo que ocupa todo el ancho y desde groundY hasta el borde inferior
+    // Cambio de mes
+  if (dia > 30) {
+      dia = 1;
+      mes = mes + 1;
+    }
 
+    // Cambio de año
+    if (mes > 12) {
+      mes = 1;
+      anio = anio + 1;
+    }
+  }
 
-        // Sol
-        fill(232, 228, 12);
-        circle(xS, yS, rS);
-
-        // Luna
-        fill(200);
-        circle(xL, yL , rL);
-
-        // Fecha
-        textSize(20);
-        text("Fecha: (" + dia + ") (" + mes + ") (" + anio + ")", 10, 30);
-
-        // Reinicio del Sol = nuevo día
-        if (xS > 2 * width + rS) {
-          xS = -rS;
-          xL = -width;
-          dia = dia + 1;
-        }
-
-        // Cambio de mes
-        if (dia > 30) {
-          dia = 1;
-          mes = mes + 1;
-        }
-
-        // Cambio de año
-        if (mes > 12) {
-          mes = 1;
-          anio = anio + 1;
-        }
-
-        // Movimiento del Stickman (izquierda/derecha)
-        if (keyIsDown(LEFT_ARROW)) {
-          xP = xP - vP;
-        } else if (keyIsDown(RIGHT_ARROW)) {
-          xP = xP + vP;
-        }
-
-        // Limitar movimiento del Stickman para que no salga del lienzo
-        if (xP < 0) {
-          xP = 0;
-        }
-        if (xP > width) {
-          xP = width;
-        }
-
-        // Física mínima del salto
-        vY = vY + g;    // gravedad
-        yP = yP + vY;    // actualización de la posición vertical
-
-        // Si toca el suelo, corregimos
-        if (yP > groundY) {
-          yP = groundY;
-          vY = 0;
-        }
-
-        // Dibujo del Stickman
-        dibujarStickman();
-      }
-
-      // Función para manejar el salto con keyPressed
-      function keyPressed() {
-        if (keyCode === UP_ARROW) {
-          // Solo saltamos si estamos en el suelo
-          if (yP === groundY) {
-            vY = jumpV;
-          }
-        }
-      }
-
-      // Función para dibujar al Stickman
-      function dibujarStickman() {
-        let rHead = 0.20 * S;
-        let bodyL = 0.60 * S;
-        let armL  = 0.45 * S;
-        let legL  = 0.55 * S;
-
-        let hipY = yP - legL;          // cadera por encima de los pies
-        let shoulderY = hipY - bodyL;  // hombros por encima de la cadera
-        let headY = shoulderY - rHead; // centro de la cabeza
-
-        stroke(180);
-        strokeWeight(0.06 * S);
-        noFill();
-
-        // Cabeza
-        circle(xP, headY, 2 * rHead);
-
-        // Tronco
-        line(xP, shoulderY, xP, hipY);
-
-        // Brazos
-        line(xP - 0.25*S, shoulderY, xP + 0.25*S, shoulderY);
-        line(xP - 0.25*S, shoulderY, xP - 0.25*S, shoulderY + armL);
-        line(xP + 0.25*S, shoulderY, xP + 0.25*S, shoulderY + armL);
-
-        // Piernas
-        line(xP, hipY, xP - 0.18*S, yP);
-        line(xP, hipY, xP + 0.18*S, yP);
-      }
-    </script>
+ </script>
   </body>
+
 </html>
+
 
 
 
