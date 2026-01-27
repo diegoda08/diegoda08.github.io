@@ -36,7 +36,7 @@
         // Inicialización del calendario
         dia = 1;
         mes = 1;
-        anio = 2025;
+        año = 2025;
 
         // Suelo
         groundY = 0.80 * height;
@@ -88,7 +88,7 @@
 
         // Fecha
         textSize(20);
-        text("Fecha: (" + dia + ") (" + mes + ") (" + anio + ")", 10, 30);
+        text("Fecha: (" + dia + ") (" + mes + ") (" + año + ")", 10, 30);
 
         // Reinicio del Sol = nuevo día
         if (xS > 2 * width + rS) {
@@ -106,7 +106,7 @@
         // Cambio de año
         if (mes > 12) {
           mes = 1;
-          anio = anio + 1;
+          año = año + 1;
         }
 
         // Movimiento del Stickman (izquierda/derecha)
@@ -181,6 +181,7 @@
     </script>
   </body>
 </html>
+
 
 
 
