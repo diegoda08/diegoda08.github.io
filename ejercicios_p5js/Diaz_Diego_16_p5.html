@@ -1,0 +1,260 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>T16 IMPACTO Y PUNTOS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  </head>
+
+  <body>
+    <script>
+      // ===============================
+      // VARIABLES GLOBALES
+      // ===============================
+      // SOL Y LUNA
+      let xS, yS, rS;
+      let xL, yL, rL;
+      let vel;
+
+      // CALENDARIO
+      let dia, mes, anio;
+
+      // STICKMAN
+      let xP, yP, S, vP;
+      let groundY, vY, jumpV, g;
+
+      // DISPARO
+      let xD, yD, tD, vD;
+      let disparoActivo;
+
+      // OBJETIVO
+      let xO, yO, wO, hO, vO;
+
+      // PUNTOS
+      let puntos = 0;
+
+      // ===============================
+      // setup()
+      // ===============================
+      function setup() {
+        createCanvas(600, 400);
+
+        // Sol
+        rS = width * 0.1;
+        xS = -rS;
+        yS = height / 2;
+
+        // Luna
+        rL = width * 0.05;
+        xL = -width;
+        yL = height / 2;
+
+        vel = 2;
+
+        // Calendario
+        dia = 1;
+        mes = 1;
+        anio = 2025;
+
+        // Suelo
+        groundY = 0.8 * height;
+
+        // Stickman
+        S = 0.12 * min(width, height);
+        xP = 0.25 * width;
+        yP = groundY;
+        vP = width / 150;
+
+        vY = 0;
+        jumpV = -0.03 * height;
+        g = 0.0016 * height;
+
+        // Disparo
+        tD = 0.02 * width;
+        vD = 0.04 * height;
+        disparoActivo = false;
+
+        // Objetivo
+        wO = 0.1 * width;
+        hO = 0.05 * height;
+        yO = random(0.2 * height, 0.35 * height);
+        xO = -wO;
+        vO = random(1, 3);
+      }
+
+      // ===============================
+      // draw()
+      // ===============================
+      function draw() {
+        // CIELO DÍA / NOCHE
+        noStroke();
+        if (xS <= width + rS) {
+          background(12, 170, 232);
+        } else {
+          background(0);
+        }
+
+        // SUELO
+        fill(34, 139, 34);
+        rect(0, groundY, width, height - groundY);
+
+        // DIBUJAR SOL Y LUNA
+        dibujarSol();
+        dibujarLuna();
+
+        // MOVIMIENTO SOL Y LUNA
+        xS += vel;
+        xL += vel;
+
+        if (xS > 2 * width + rS) {
+          xS = -rS;
+          xL = -width;
+          actualizarCalendario();
+        }
+
+        // MOVIMIENTO OBJETIVO
+        xO += vO;
+        if (xO > width + wO || xO < -wO) {
+          xO = (xO > width) ? -wO : width + wO;
+          vO = random(1, 3);
+        }
+
+        // DIBUJAR OBJETIVO
+        dibujarObjetivo();
+
+        // MOVIMIENTO DISPARO
+        if (disparoActivo) {
+          yD -= vD;
+          if (yD < 0) {
+            disparoActivo = false;
+          }
+          dibujarDisparo();
+
+          // COMPROBAR IMPACTO (SI EL DISPARO ESTÁ ACTIVO)
+          if (xD >= xO && xD <= xO + wO && yD >= yO && yD <= yO + hO) {
+            // IMPACTO DETECTADO
+            puntos++; // Aumenta el contador de puntos
+            disparoActivo = false; // Desactivar el disparo
+            xO = (xO > width) ? -wO : width + wO; // Reiniciar la posición del objetivo
+            vO = random(1, 3); // Cambiar la velocidad del objetivo
+          }
+        }
+
+        // STICKMAN (MOVIMIENTO + DIBUJO)
+        if (keyIsDown(LEFT_ARROW)) xP -= vP;
+        if (keyIsDown(RIGHT_ARROW)) xP += vP;
+
+        xP = constrain(xP, 0, width);
+
+        vY += g;
+        yP += vY;
+
+        if (yP > groundY) {
+          yP = groundY;
+          vY = 0;
+        }
+
+        dibujarStickman();
+
+        // DIBUJAR CALENDARIO
+        dibujarCalendario();
+
+        // DIBUJAR PUNTOS
+        dibujarPuntos();
+      }
+
+      // ===============================
+      // keyPressed()
+      // ===============================
+      function keyPressed() {
+        if (keyCode === UP_ARROW && yP === groundY) {
+          vY = jumpV;
+        }
+
+        if (key === ' ' && !disparoActivo) {
+          xD = xP;
+          yD = yP - S;
+          disparoActivo = true;
+        }
+      }
+
+      // ===============================
+      // FUNCIONES DE DIBUJO
+      // ===============================
+      function dibujarSol() {
+        fill(232, 228, 12);
+        circle(xS, yS, rS);
+      }
+
+      function dibujarLuna() {
+        fill(200);
+        circle(xL, yL, rL);
+      }
+
+      function dibujarObjetivo() {
+        fill(255, 0, 0);
+        rect(xO, yO, wO, hO, 5);
+      }
+
+      function dibujarDisparo() {
+        fill(255, 255, 0);
+        ellipse(xD, yD, tD, tD);
+      }
+
+      function dibujarStickman() {
+        let rHead = 0.2 * S;
+        let bodyL = 0.6 * S;
+        let armL = 0.45 * S;
+        let legL = 0.55 * S;
+
+        let hipY = yP - legL;
+        let shoulderY = hipY - bodyL;
+        let headY = shoulderY - rHead;
+
+        stroke(180);
+        strokeWeight(0.06 * S);
+        noFill();
+
+        circle(xP, headY, 2 * rHead);
+        line(xP, shoulderY, xP, hipY);
+
+        line(xP - 0.25 * S, shoulderY, xP + 0.25 * S, shoulderY);
+        line(xP - 0.25 * S, shoulderY, xP - 0.25 * S, shoulderY + armL);
+        line(xP + 0.25 * S, shoulderY, xP + 0.25 * S, shoulderY + armL);
+
+        line(xP, hipY, xP - 0.18 * S, yP);
+        line(xP, hipY, xP + 0.18 * S, yP);
+      }
+
+      function dibujarCalendario() {
+        fill(255);
+        noStroke();
+        textSize(20);
+        text("Fecha: (" + dia + ") (" + mes + ") (" + anio + ")", 10, 30);
+      }
+
+      function actualizarCalendario() {
+        dia++;
+
+        if (dia > 30) {
+          dia = 1;
+          mes++;
+        }
+
+        if (mes > 12) {
+          mes = 1;
+          anio++;
+        }
+      }
+
+      // NUEVA FUNCIÓN PARA DIBUJAR PUNTOS
+      function dibujarPuntos() {
+        fill(255);
+        noStroke();
+        textSize(20);
+        text("Puntos: " + puntos, width - 120, 30); // Mostrar puntos en la esquina superior derecha
+      }
+    </script>
+  </body>
+</html>
