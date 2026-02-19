@@ -34,10 +34,13 @@
   </div>
 
   <div>
-   <h3> Explicación de cómo funciona el código</h3>
+   <h3> Lo que hace es la detección de obletos a traves de una camara</h3>
 
-   <p> Sustituye este párrafo por una explicación, en varios párrafos de lo que hace el script, bloque a bloque, que habéis utilizado para la tarea. Es un script muy avanzado para vosotros, pero sí estáis en condiciones de analizarlo parte a parte y ver que hace cada parte. Cuanto mejor esté explicado, mejor será la nota en la tarea. Una explicación de un párrafo tendrá poca nota </p>
-
+   <p> btnStart es como el bton para empezar y otros como video donde se ve la camara y canvas, que es la capa encima del video para dibujar los cuadros,initCamera() ajusta el video a la pantalla y pide permiso a la camara para grabar con getUserMedia.
+     En draw(detections) se actualiza la imagen y crea el cuadrado que rodea el objeto, ademas del porcentaje y el nombre.
+     En pickBest(detections) revisa los objetos detectados y devuelve el que tenga mas confianza.
+     En loopDetect(), mienrtras runing sea verdadero, analiza el objeto con detector.detect().
+     Y cuando le das Start inica camara y emieza la detección.
   </div>
 
 
@@ -136,4 +139,5 @@
     });
   </script>
 </body>
+
 </html>
