@@ -30,7 +30,12 @@
 </head>
 
 <body>
-  <h1>ML5 03 · BodyPose (captura de posturas)</h1>
+  <h1>Posibles fallas: No se verifica si video está definido antes de usarlo en draw()
+                       Posible error al calcular el timestamp (ts) debido al formato de fecha
+                       Deshabilitar botón "Capturar" hasta que se detecte el cuerpo
+                       Problema con bodyPose.detectStart() y el ciclo de vida del video
+                       El modelo de ml5.bodyPose() no está cargado correctamente
+                      </h1>
 
   <div class="row">
     <button id="btnStart">Iniciar cámara + BodyPose</button>
@@ -239,4 +244,5 @@
     });
   </script>
 </body>
+
 </html>
