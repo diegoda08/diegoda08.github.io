@@ -83,12 +83,43 @@
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
 
         <a-marker preset="hiro">
-          <a-box
-            position="0 0.5 0"
-            rotation="0 45 0"
-            scale="0.5 0.5 0.5"
-            color="red">
-          </a-box>
+         <!-- Poste -->
+  <a-cylinder
+    position="0 0.75 0"
+    radius="0.05"
+    height="1.5"
+    color="#888">
+  </a-cylinder>
+
+  <!-- Caja del semáforo -->
+  <a-box
+    position="0 1.6 0"
+    width="0.3"
+    height="0.6"
+    depth="0.2"
+    color="#222">
+  </a-box>
+
+  <!-- Luz roja -->
+  <a-sphere
+    position="0 1.8 0.11"
+    radius="0.06"
+    color="red">
+  </a-sphere>
+
+  <!-- Luz amarilla -->
+  <a-sphere
+    position="0 1.6 0.11"
+    radius="0.06"
+    color="yellow">
+  </a-sphere>
+
+  <!-- Luz verde -->
+  <a-sphere
+    position="0 1.4 0.11"
+    radius="0.06"
+    color="green">
+  </a-sphere>
         </a-marker>
 
         <a-entity camera></a-entity>
